@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -15,8 +16,11 @@ class ProductoController extends Controller
     public function index()
     {
         //Listamos los procutos
-        $productos = Producto::all();
-        return view('adminProductos', [ 'productos' => $productos ]);
+        $productos = DB::table('productos')
+                                    ->join('marcas', 'productos.idMarca', '=', 'marcas.idMarca')
+                                    ->join('categorias', 'productos.idCategoria', '=', 'categorias.idCategoria')
+                                    ->get();
+        return view('adminProductos', [ 'productos'=>$productos ]);
     }
 
     /**

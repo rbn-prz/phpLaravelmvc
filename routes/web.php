@@ -14,7 +14,17 @@ Route::get('/', function () {
 ########################################
 ### CRUD de Marcas
 
+Route::get('/adminMarcas', [ MarcaController::class, 'index' ]);
+Route::get('/agregarMarca', [ MarcaController::class, 'create']);
+Route::post('/agregarMarca', [ MarcaController::class, 'store']);
+Route::get('/modificarMarca/{id}', [MarcaController::class, 'edit']);
 
-Route::get('/adminMarcas',      [ MarcaController::class, 'index' ]);
-Route::get('/adminCategorias',  [ CategoriaController::class, 'index' ]);
-Route::get('/adminProductos',   [ ProductoController::class, 'index' ]);
+########################################
+### CRUD de Categorias
+
+Route::get('/adminCategorias', [ CategoriaController::class, 'index' ]);
+
+########################################
+### CRUD de Productos
+
+Route::get('/adminProductos', [ ProductoController::class, 'index' ]);

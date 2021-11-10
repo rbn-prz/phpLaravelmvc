@@ -32,11 +32,11 @@
                     
                 <tr>
                     <td> {{ $producto->prdNombre }} </td>
-                    <td>{{ $producto->mkNombre }}</td>
-                    <td>{{ $producto->catNombre }}</td>
-                    <td>$ {{ $producto->prdPrecio }}</td>
+                    <td> {{ $producto->getMarca->mkNombre }}  </td>
+                    <td> {{ $producto->getCategoria->catNombre }} </td>
+                    <td>${{ $producto->prdPrecio }} </td>
                     <td> {{ $producto->prdPresentacion }} </td>
-                    <td><img src="/productos/{{ $producto->prdImagen}}" alt=""></td>
+                    <td><img src="/productos/{{ $producto->prdImagen}}" class="img-thumbnail" alt=""></td>
                     <td>
                         <a href="/modificarProducto" class="btn btn-outline-secondary">
                             Modificar
@@ -50,9 +50,10 @@
                 </tr>
                 
                 @endforeach
-                
+
             </tbody>
         </table>
 
+        {{ $productos->links() }}
 
     @endsection

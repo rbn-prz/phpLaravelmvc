@@ -10,4 +10,6 @@ class Marca extends Model
     use HasFactory;
     //Si la tabla no sigue la convencion
     //protected table = 'adsadsadsa'; //aca como se llama la tabla
+
+    public $timestamps = false;
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Marca;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class MarcaController extends Controller
@@ -54,7 +55,7 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        // Guardar el recuros (como un insert)
+        // Guardar el recurso (como un insert)
 
         //capturamos el dato del formulario 
         $mkNomre = $request->mkNombre;
@@ -91,7 +92,11 @@ class MarcaController extends Controller
      */
     public function edit($id)
     {
-        //
+        //obtenemos datos de marca
+        $Marca = Marca::find($id);
+        //retornamo vista de form con datos
+        return view('modificarMarca'. [ 'Marca' => $Marca ]);
+
     }
 
     /**
@@ -101,12 +106,46 @@ class MarcaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $mkNombre = $request->mkNombre;
+        //Validacion
+        $this->validarForm($request);
+        //obtnemos datos de la marca
+        $Marca = Marca::find($request->idMarca);
+        //Asignacon y guardar
+        $Marca->mkNombre = $mkNomre;
+        $Marca->save();
+        //retornar redireccion con mensaje OK
+        return redirect('/adminMarcas')->with(['mensaje' => 'Marca '.$mkNomre.' Modificada   correctamente.']);
+    }
+
+    private function productoPorMarca($idMarca)
+    {
+        //$check = Producto::where('idMarca', $idMarca)->count();
+        //$check = Producto::where('idMarca', $idMarca)->first();
+        $check = Producto::firstWhere('idMarca', $idMarca);
+        return $check;
+    }
+
+    public function confirmarBaja($id)
+    {
+        //Obtenemos datos de una marca
+        $Marca = Marca::find($id);
+        //Si no hay productos de esa marca
+        $aux = $this->productoPorMarca($id);
+        //dd($aux) //onda un var_dump
+        //Si no hay productos retornamos lista de confirmacion
+        if ( !$this->productoPorMarca($id) ) {
+            return redirect('/adminMarcas')->with([ 'mensaje'=>'No se puede eliminar la marca: '.$Marca->mkNombre.' ya que tiene productos relacionados.' ]);
+
+        //Redireccion con mensaje que no se puede borrar
+    }
+    return 'hay algo';
     }
 
     /**
+
      * Remove the specified resource from storage.
      *
      * @param  int  $id

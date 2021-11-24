@@ -135,13 +135,18 @@ class MarcaController extends Controller
         //Si no hay productos de esa marca
         $aux = $this->productoPorMarca($id);
         //dd($aux) //onda un var_dump
+
         //Si no hay productos retornamos lista de confirmacion
         if ( !$this->productoPorMarca($id) ) {
+
             return redirect('/adminMarcas')->with([ 'mensaje'=>'No se puede eliminar la marca: '.$Marca->mkNombre.' ya que tiene productos relacionados.' ]);
 
-        //Redireccion con mensaje que no se puede borrar
+                
     }
-    return 'hay algo';
+    
+    //Redireccion con mensaje que no se puede borrar
+     return view('eliminarMarca', [ 'Marca' => $Marca ]);  
+
     }
 
     /**
@@ -151,8 +156,16 @@ class MarcaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        //Aca eliminamos, es el delete de la DB
+        /**
+         * Se puede hacer en dos pasos
+         * $Marca =  Marca::find($request->idMarca);
+         * $Marca->delete();
+         */
+        Marca::destroy($request->idMarca);
+        return redirect('/adminMarcas')->with(['mensaje' => 'Marca '.$request->mkNomre.' eliminada correctamente.']);
+
     }
 }

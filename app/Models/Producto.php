@@ -11,10 +11,15 @@ class Producto extends Model
 
     #### Metodos de relacion
 
+    # Metodo de relacion de Marca
     public function getMarca()
     {
         
         ### Metodo de relacion para que laravel escriba el join
+        ### Metodos:
+        //$this->hasOne();  //muchos a uno
+        //$this->hasMany(); //tiene muchos
+
         return $this->belongsTo(
             Marca::class,
             'idMarca',
@@ -22,6 +27,7 @@ class Producto extends Model
         );
     }
 
+    # Metodo de relacion de Categoria
     public function getCategoria()
     {
         return $this->belongsTo(

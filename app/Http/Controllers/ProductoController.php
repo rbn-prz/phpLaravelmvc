@@ -23,8 +23,9 @@ class ProductoController extends Controller
                                     ->join('marcas', 'productos.idMarca', '=', 'marcas.idMarca')
                                     ->join('categorias', 'productos.idCategoria', '=', 'categorias.idCategoria')
                                     ->get(); 
-                                    */
-        $productos = Producto::with(['getMarca', 'getCategoria'])->paginate(3);
+        */
+
+        $productos = Producto::with(['getMarca', 'getCategoria'])->paginate(6);
         return view('adminProductos', [ 'productos'=>$productos ]);
     }
 

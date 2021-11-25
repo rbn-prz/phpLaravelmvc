@@ -70,7 +70,7 @@ class MarcaController extends Controller
         $Marca->save();
 
         //redireccion + mensaje de ok
-        return redirect('/adminMarcas')->with(['mensaje' => 'Marca '.$mkNomre.' Agregada correctamente.']);
+        return redirect('/adminMarcas')->with(['mensaje' => 'Marca '.$mkNomre.' agregada correctamente.']);
     }
 
     /**

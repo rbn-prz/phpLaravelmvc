@@ -95,7 +95,7 @@ class MarcaController extends Controller
         //obtenemos datos de marca
         $Marca = Marca::find($id);
         //retornamo vista de form con datos
-        return view('modificarMarca'. [ 'Marca' => $Marca ]);
+        return view('modificarMarca', [ 'Marca'=>$Marca ]);
 
     }
 

@@ -11,7 +11,6 @@ class Marca extends Model
     //Si la tabla no sigue la convencion
     //protected table = 'adsadsadsa'; //aca como se llama la tabla
 
-    protected $Primarykey = 'idMarca';
-
+    protected $primaryKey   = 'idMarca';
     public $timestamps = false;
 }

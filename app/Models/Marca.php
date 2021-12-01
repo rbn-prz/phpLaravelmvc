@@ -12,5 +12,7 @@ class Marca extends Model
     //protected table = 'adsadsadsa'; //aca como se llama la tabla
 
     protected $primaryKey   = 'idMarca';
+
+    // Deshabilitamos los campos de tipo timeStamps
     public $timestamps = false;
 }

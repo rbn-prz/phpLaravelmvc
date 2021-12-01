@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Producto;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
 
 class CategoriaController extends Controller
 {
@@ -83,7 +85,10 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Obtenemos la Categoria
+        $Categoria = Categoria::find($id);
+        //Retornamos
+        return view('modificarCategoria',[ 'Categoria'=>$Categoria ]);
     }
 
     /**
@@ -93,9 +98,37 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $catNombre = $request->catNombre;
+        //validacion
+        $this->validarForm($request);
+        //Obtenemos datos de la cat
+        $Categoria = Categoria::find($request->idCategoria);
+        //Asignar y guardar
+        $Categoria->catNombre = $catNombre;
+        //retornamos redirec con msj OK
+        return redirect('adminCateogrias')->with(['mensaje'=>'Categoria '.$catNombre.' modificada correctamente']);
+    }
+
+    private function productoPorCategoria($idCateogoria)
+    {
+        $check = Producto::firstWhere('idCategoria', $idCateogoria);
+        return $check;
+    }
+
+    public function confirmaBaja($id) 
+    {
+        //Obtenemos los datos de la categoria
+        $Categoria = Categoria::find($id);
+        //Si no hay productos de esa categoria
+        $aux = $this->productoPorCategoria($id);
+
+        //Si no hay productos retornamos lista de confirmacion
+        if(!$aux){
+            return redirect('/adminCategorias')->with( ['mensaje'=>'No se puede elimnar la categoria '.$Categoria->catNmobre.' por que tiene productos asociados'] );
+        }
+        return view('eliminarCategoria', [ 'Categoria'=>$Categoria ]);
     }
 
     /**

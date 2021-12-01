@@ -9,12 +9,17 @@ class Producto extends Model
 {
     use HasFactory;
 
+    //Deshabilitar timestamps
+    public $timestamps = false;
+
+    protected $primaryKey = 'idProducto';
+
     #### Metodos de relacion
 
     # Metodo de relacion de Marca
     public function getMarca()
     {
-        
+
         ### Metodo de relacion para que laravel escriba el join
         ### Metodos:
         //$this->hasOne();  //muchos a uno

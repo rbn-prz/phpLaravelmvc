@@ -139,13 +139,11 @@ class MarcaController extends Controller
         //Si no hay productos retornamos lista de confirmacion
         if ( !$this->productoPorMarca($id) ) {
 
+            //Redireccion con mensaje que no se puede borrar
             return redirect('/adminMarcas')->with([ 'mensaje'=>'No se puede eliminar la marca: '.$Marca->mkNombre.' ya que tiene productos relacionados.' ]);
+        }
 
-                
-    }
-    
-    //Redireccion con mensaje que no se puede borrar
-     return view('eliminarMarca', [ 'Marca' => $Marca ]);  
+        return view('eliminarMarca', [ 'Marca' => $Marca ]);  
 
     }
 

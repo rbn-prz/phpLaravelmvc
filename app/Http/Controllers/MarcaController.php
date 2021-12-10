@@ -114,10 +114,10 @@ class MarcaController extends Controller
         //obtnemos datos de la marca
         $Marca = Marca::find($request->idMarca);
         //Asignacon y guardar
-        $Marca->mkNombre = $mkNomre;
+        $Marca->mkNombre = $mkNombre;
         $Marca->save();
         //retornar redireccion con mensaje OK
-        return redirect('/adminMarcas')->with(['mensaje' => 'Marca '.$mkNomre.' Modificada   correctamente.']);
+        return redirect('/adminMarcas')->with(['mensaje' => 'Marca '.$mkNombre.' Modificada   correctamente.']);
     }
 
     private function productoPorMarca($idMarca)
@@ -134,17 +134,15 @@ class MarcaController extends Controller
         $Marca = Marca::find($id);
         //Si no hay productos de esa marca
         $aux = $this->productoPorMarca($id);
-        //dd($aux) //onda un var_dump
+        //dd($aux); //onda un var_dump
 
         //Si no hay productos retornamos lista de confirmacion
-        if ( !$this->productoPorMarca($id) ) {
-
-            //Redireccion con mensaje que no se puede borrar
-            return redirect('/adminMarcas')->with([ 'mensaje'=>'No se puede eliminar la marca: '.$Marca->mkNombre.' ya que tiene productos relacionados.' ]);
+        if ( !$aux ) {
+            return view('eliminarMarca', [ 'Marca' => $Marca ]);  
         }
-
-        return view('eliminarMarca', [ 'Marca' => $Marca ]);  
-
+        //Redireccion con mensaje que no se puede borrar
+        return redirect('/adminMarcas')->with([ 'mensaje'=>'No se puede eliminar la marca: '.$Marca->mkNombre.' ya que tiene productos relacionados.' ]);
+        
     }
 
     /**

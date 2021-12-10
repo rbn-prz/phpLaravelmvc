@@ -104,11 +104,12 @@ class CategoriaController extends Controller
         //validacion
         $this->validarForm($request);
         //Obtenemos datos de la cat
-        $Categoria = Categoria::find($request->idCategoria);
+        $Categoria = Categoria::find($request->idCategoria);        
         //Asignar y guardar
         $Categoria->catNombre = $catNombre;
+        $Categoria->save();
         //retornamos redirec con msj OK
-        return redirect('adminCateogrias')->with(['mensaje'=>'Categoria '.$catNombre.' modificada correctamente']);
+        return redirect('/adminCategorias')->with(['mensaje'=>'Categoria '.$catNombre.' modificada correctamente']);
     }
 
     private function productoPorCategoria($idCateogoria)
@@ -117,7 +118,7 @@ class CategoriaController extends Controller
         return $check;
     }
 
-    public function confirmaBaja($id) 
+    public function confirmarBaja($id) 
     {
         //Obtenemos los datos de la categoria
         $Categoria = Categoria::find($id);
@@ -126,9 +127,9 @@ class CategoriaController extends Controller
 
         //Si no hay productos retornamos lista de confirmacion
         if(!$aux){
-            return redirect('/adminCategorias')->with( ['mensaje'=>'No se puede elimnar la categoria '.$Categoria->catNmobre.' por que tiene productos asociados'] );
+            return view('eliminarCategoria', [ 'Categoria' => $Categoria ]);
         }
-        return view('eliminarCategoria', [ 'Categoria'=>$Categoria ]);
+        return redirect('/adminCategorias')->with([ 'mensaje'=>'No se puede elimnar la categoria '.$Categoria->catNmobre.' por que tiene productos asociados' ]);
     }
 
     /**
@@ -137,8 +138,10 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        //Elimino en un paso
+        Categoria::destroy($request->idcategoria);
+        return redirect('/adminCategorias')->with( ['mensaje' => 'Categoria  '.$request->catNombre.' eliminada correctamente'] );
     }
 }

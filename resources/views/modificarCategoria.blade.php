@@ -26,6 +26,7 @@
                     <label for="catNombre">Nombre de la categoria</label>
                     <input type="text" name="catNombre" class="form-control" id="catNombre" value="{{ old('catNombre', $Categoria->catNombre) }}">
                 </div>
+                <input type="hidden" name="idCategoria" value="{{ $Categoria->idCategoria }}">
                 <button class="btn btn-dark mr-3">Modificar marca</button>
                 <a href="/adminCategorias" class="btn btn-outline-secondary">
                     Volver a panel

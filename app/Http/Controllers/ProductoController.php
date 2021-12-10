@@ -25,7 +25,7 @@ class ProductoController extends Controller
                                     ->get(); 
         */
 
-        $productos = Producto::with(['getMarca', 'getCategoria'])->paginate(6);
+        $productos = Producto::with(['getMarca', 'getCategoria'])->paginate(4);
         return view('adminProductos', [ 'productos'=>$productos ]);
     }
 
@@ -152,7 +152,9 @@ class ProductoController extends Controller
         $Marcas = Marca::all();
         $Categorias = Categoria::all();
         //retornar la vista del form
-        return view('modificarProducto', [ 'Producto'=>$Producto, 'Marcas'=>$Marcas, 'Categorias'=>$Categorias ]);
+        return view('modificarProducto', [ 'Producto'   => $Producto, 
+                                           'Marcas'     => $Marcas, 
+                                           'Categorias' => $Categorias ]);
     }
 
     /**

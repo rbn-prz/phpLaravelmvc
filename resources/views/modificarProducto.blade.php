@@ -52,7 +52,7 @@
                 </select>
                 <br>
                 Presentacion: <br>
-                <textarea name="prdPresentacion" class="form-control" value="{{ $Producto->prdPresentacion }}"></textarea>
+                <textarea name="prdPresentacion" class="form-control">{{ $Producto->prdPresentacion }}</textarea>
                 <br>
                 Stock: <br>
                 <input type="number" name="prdStock" class="form-control" min="0" value="{{ old('prdStock', $Producto->prdStock) }}">

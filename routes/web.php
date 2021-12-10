@@ -23,7 +23,7 @@ Route::get('/modificarMarca/{id}', [ MarcaController::class, 'edit'] );
 Route::patch('/modificarMarca', [ MarcaController::class, 'update'] );
 # Eliminar
 Route::get('/eliminarMarca/{id}', [ MarcaController::class, 'confirmarBaja'] );
-Route::delete('/eliminarMaca', [ MarcaController::class, 'destroy' ]);
+Route::delete('/eliminarMarca', [ MarcaController::class, 'destroy' ]);
 
 ########################################
 ### CRUD de Categorias
@@ -48,8 +48,9 @@ Route::get('/agregarProducto', [ ProductoController::class, 'create' ]);
 Route::post('/agregarProducto', [ ProductoController::class, 'store' ]);
 # Modificar
 Route::get('/modificarProducto/{id}', [ ProductoController::class, 'edit' ]);
-Route::patch('/modificarPorducto', [ ProductoController::class, 'update' ]);
+Route::patch('/modificarProducto', [ ProductoController::class, 'update' ]);
 # Eliminar
 Route::get('/eliminarProducto/{id}', [ ProductoController::class, 'confirmarBaja' ]);
 Route::delete('/eliminarProducto', [ ProductoController::class, 'destroy' ]);
+
 

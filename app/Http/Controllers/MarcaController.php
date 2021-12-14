@@ -136,7 +136,7 @@ class MarcaController extends Controller
         $aux = $this->productoPorMarca($id);
         //dd($aux); //onda un var_dump
 
-        //Si no hay productos retornamos lista de confirmacion
+        //Si no hay productos retornamos lista de confirmacion 
         if ( !$aux ) {
             return view('eliminarMarca', [ 'Marca' => $Marca ]);  
         }

@@ -185,14 +185,26 @@ class ProductoController extends Controller
         return redirect('adminProductos')->with([ 'mensaje'=>'Producto: '.$Producto->prdNombre.' modificado correctamente.' ]);
     }
 
+    public function confirmaBaja($id) 
+    {
+        //Obtenemos los datos del producto
+        $Producto = Producto::find($id);
+
+        //Retornamos la vista con el producto
+        return view('eliminarProducto', [ 'Producto' => $Producto ]);
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        //Eliminamos y retornamos mensaje
+        Producto::destroy($request->idProducto);
+        return redirect('adminProductos')->with([ 'mensaje' => 'Producto: '.$request->prdNombre.' eliminado correctamente.' ]);
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.plantilla')
 
-    @section('contenido')
+    @section('contenido') 
 
         <h1>Baja de un producto</h1>
 
@@ -31,13 +31,13 @@
             </div>
 
             <script>
-                /*
+                
                 Swal.fire(
                     'Título de la ventana',
                     'descripción de la ventana, blah, blah',
                     'warning'
                 )
-                */
+                                
             </script>
 
 

@@ -1,15 +1,20 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
 
+#######################################
+### Index
+# Retorno vista de administracion
+Route::get('/', [ AdminController::class, 'index']);
 
 ########################################
 ### CRUD de Marcas
